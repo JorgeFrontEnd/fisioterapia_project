@@ -1,0 +1,16 @@
+body{
+    margin: 0;
+    box-sizing: border-box;
+}
+
+.login{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.app{
+    display: flex;
+    justify-content: center;
+}
