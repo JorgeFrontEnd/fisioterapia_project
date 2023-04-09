@@ -19,7 +19,7 @@
             <label>Password:</label>
             <input type="password" id="login_password" name="login_password">
             <br>
-            <a href="register.html">Registre-se aqui</a>
+            <a href="register.php">Registre-se aqui</a>
             <button id="login_button" type="submit">Login</button>
         </form>
     </div>

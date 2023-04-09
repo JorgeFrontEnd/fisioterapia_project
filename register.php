@@ -10,6 +10,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $user_type = "normal";
 
     $stmt = $conn->prepare("INSERT INTO users (username, password, user_type, height, weight, sex) VALUES (?, ?, ?, ?, ?, ?)");
+    if (!$stmt) {
+        echo "Error: " . $conn->error;
+    }
     $stmt->bind_param("ssssss", $username, $password, $user_type, $height, $weight, $sex);
 
     if ($stmt->execute()) {
