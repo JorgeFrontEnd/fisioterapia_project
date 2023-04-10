@@ -13,12 +13,10 @@
 
     <div class="form-pages">
         <form action="login_process.php" method="post">
-            <label>Username:</label>
+            <label>Username</label>
             <input type="text" id="login_username" name="login_username">
-            <br>
-            <label>Password:</label>
+            <label>Password</label>
             <input type="password" id="login_password" name="login_password">
-            <br>
             <a href="register.php">Registre-se aqui</a>
             <button id="login_button" type="submit">Login</button>
         </form>
