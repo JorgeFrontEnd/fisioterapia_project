@@ -10,9 +10,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $user_type = "normal";
 
     $stmt = $conn->prepare("INSERT INTO users (username, password, user_type, height, weight, sex) VALUES (?, ?, ?, ?, ?, ?)");
-    if (!$stmt) {
-        echo "Error: " . $conn->error;
-    }
     $stmt->bind_param("ssssss", $username, $password, $user_type, $height, $weight, $sex);
 
     if ($stmt->execute()) {
@@ -38,18 +35,19 @@ $conn->close();
 </head>
 
 <body>
-    <div class="form-pages">
+    <div class="form-pages register">
         <form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>">
-            Username: <input type="text" name="username" required><br>
-            Password: <input type="password" name="password" required><br>
-            Height: <input type="number" name="height" step="0.01" required><br>
-            Weight: <input type="number" name="weight" step="0.01" required><br>
-            Sex: <select name="sex" required>
+            <label>Username</label> <input type="text" name="username" required>
+            <label>Password</label> <input type="password" name="password" required>
+            <label>Height</label> <input type="number" name="height" step="0.01" required>
+            <label>Weight</label><input type="number" name="weight" step="0.01" required>
+            Sex<select name="sex" required>
                 <option value="">Select...</option>
                 <option value="male">Male</option>
                 <option value="female">Female</option>
             </select><br>
-            <input type="submit" value="Register">
+            <button type="submit">Register</button>
+            <a href="index.php">Já possui uma conta?</a>
         </form>
     </div>
 
