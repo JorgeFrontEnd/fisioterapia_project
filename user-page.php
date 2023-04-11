@@ -44,6 +44,7 @@ if (isset($_POST['question'])) {
 
 // Fetch all questions from the "Dance" category
 $dance_questions = mysqli_query($conn, "SELECT * FROM questions WHERE category='Danca'");
+$posture_questions = mysqli_query($conn, "SELECT * FROM questions WHERE category='Postura'");
 
 // Close the connection
 mysqli_close($conn);
@@ -103,7 +104,7 @@ mysqli_close($conn);
                 </form>
                 <hr>
                 <h3>Questions:</h3>
-                 <?php while ($question = mysqli_fetch_assoc($dance_questions)): ?>
+                 <?php while ($question = mysqli_fetch_assoc($posture_questions)): ?>
                 <p>
                     <?php echo $question['question']; ?>
                 </p>
