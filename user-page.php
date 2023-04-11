@@ -1,4 +1,4 @@
-<!-- <?php
+<?php
 
 require 'config.php';
 
@@ -48,7 +48,7 @@ $dance_questions = mysqli_query($conn, "SELECT * FROM questions WHERE category='
 // Close the connection
 mysqli_close($conn);
 
-?> -->
+?> 
 
 <!DOCTYPE html>
 <html lang="en">
@@ -86,11 +86,11 @@ mysqli_close($conn);
                 </form>
                 <hr>
                 <h3>Questions:</h3>
-                <!-- <?php while ($question = mysqli_fetch_assoc($dance_questions)): ?>
+                <?php while ($question = mysqli_fetch_assoc($dance_questions)): ?>
                 <p>
                     <?php echo $question['question']; ?>
                 </p>
-                <?php endwhile; ?> -->
+                <?php endwhile; ?> 
             </div>
         </div>
         <div class="accordion">
@@ -103,11 +103,11 @@ mysqli_close($conn);
                 </form>
                 <hr>
                 <h3>Questions:</h3>
-                <!-- <?php while ($question = mysqli_fetch_assoc($dance_questions)): ?>
+                 <?php while ($question = mysqli_fetch_assoc($dance_questions)): ?>
                 <p>
                     <?php echo $question['question']; ?>
                 </p>
-                <?php endwhile; ?> -->
+                <?php endwhile; ?> 
             </div>
         </div>
     </div>
