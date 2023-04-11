@@ -1,4 +1,4 @@
-<?php
+<!-- <?php
 
 require 'config.php';
 
@@ -48,7 +48,7 @@ $dance_questions = mysqli_query($conn, "SELECT * FROM questions WHERE category='
 // Close the connection
 mysqli_close($conn);
 
-?>
+?> -->
 
 <!DOCTYPE html>
 <html lang="en">
@@ -79,19 +79,18 @@ mysqli_close($conn);
         <div class="accordion">
             <div class="accordion-header">Dance</div>
             <div class="accordion-panel">
-                <iframe width="300" height="200" src="https://www.youtube.com/embed/tgbNymZ7vqY"></iframe>
+                <iframe src="https://www.youtube.com/embed/tgbNymZ7vqY"></iframe>
                 <form action="user-page.php?category=Danca" method="POST">
-                    <label for="question">Question:</label><br>
-                    <textarea name="question" id="question" cols="30" rows="5" required></textarea><br><br>
+                    <textarea name="question" id="question" placeholder="Pergunte algo" required></textarea>
                     <input type="submit" value="Submit">
                 </form>
                 <hr>
                 <h3>Questions:</h3>
-                <?php while ($question = mysqli_fetch_assoc($dance_questions)): ?>
+                <!-- <?php while ($question = mysqli_fetch_assoc($dance_questions)): ?>
                 <p>
                     <?php echo $question['question']; ?>
                 </p>
-                <?php endwhile; ?>
+                <?php endwhile; ?> -->
             </div>
         </div>
         <div class="accordion">
@@ -99,17 +98,16 @@ mysqli_close($conn);
             <div class="accordion-panel">
                 <iframe width="300" height="200" src="https://www.youtube.com/embed/tgbNymZ7vqY"></iframe>
                 <form action="user-page.php?category=Postura" method="POST">
-                    <label for="question">Question:</label><br>
-                    <textarea name="question" id="question" cols="30" rows="5" required></textarea><br><br>
+                    <textarea name="question" id="question" placeholder="Pergunte algo" required></textarea>
                     <input type="submit" value="Submit">
                 </form>
                 <hr>
                 <h3>Questions:</h3>
-                <?php while ($question = mysqli_fetch_assoc($dance_questions)): ?>
+                <!-- <?php while ($question = mysqli_fetch_assoc($dance_questions)): ?>
                 <p>
                     <?php echo $question['question']; ?>
                 </p>
-                <?php endwhile; ?>
+                <?php endwhile; ?> -->
             </div>
         </div>
     </div>
