@@ -14,9 +14,21 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $stmt->bind_param("ssssss", $username, $password, $user_type, $height, $weight, $sex);
 
     if ($stmt->execute()) {
-        echo "New record created successfully";
+        echo '
+            <div class="popup">
+              <div class="popup-content">
+                <p class="popup-message">Registro efetuado com sucesso</p>
+                <button class="popup-button">OK</button>
+              </div>
+            </div>';
     } else {
-        echo "Error: " . $stmt->error;
+        echo '
+            <div class="popup">
+              <div class="popup-content">
+                <p class="popup-message">Oops! Algo errado aconteceu, talvez este utilizador ja exista</p>
+                <button class="popup-button">OK</button>
+              </div>
+            </div>';
     }
 
     $stmt->close();
@@ -25,7 +37,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 $conn->close();
 ?>
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt">
 
 <head>
     <meta charset="UTF-8">
@@ -56,4 +68,4 @@ $conn->close();
     <script src="app.js"></script>
 </body>
 
-</html>
+</html> 

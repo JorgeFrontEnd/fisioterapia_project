@@ -1,12 +1,11 @@
 <?php
-session_start();
-require 'con.php';
+    session_start();
+    require 'con.php';
+    
+    if (isset($_POST['login_username']) && isset($_POST['login_password'])) {
+        $login_username = $_POST['login_username'];
+        $login_password = $_POST['login_password'];
 
-if (isset($_POST['login_username']) && isset($_POST['login_password'])) {
-    $login_username = $_POST['login_username'];
-    $login_password = $_POST['login_password'];
-
-    if(!empty($login_username) && !empty($login_password)) {
         $sql = "SELECT * FROM users WHERE username = '$login_username'";
         $result = mysqli_query($conn, $sql);
 
@@ -24,22 +23,22 @@ if (isset($_POST['login_username']) && isset($_POST['login_password'])) {
                 exit();
             }
         }
+        else {
+                echo '
+                <div class="popup">
+                  <div class="popup-content">
+                    <p class="popup-message">Oops! Credencias incorretas</p>
+                    <button class="popup-button">OK</button>
+                  </div>
+                </div>';
+            }
     }
-
-    // show popup for invalid credentials
-    echo '
-    <div class="popup">
-        <div class="popup-content">
-            <p class="popup-message">Oops! Credenciais incorretas</p>
-            <button class="popup-button">OK</button>
-        </div>
-    </div>';
-}
 ?>
 
 
+
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
