@@ -10,3 +10,10 @@ accordionHeaders.forEach(header => {
     panel.style.display = panel.style.display === 'none' ? 'block' : 'none';
   });
 });
+
+function closePopup() {
+  document.querySelector('.popup').style.display = 'none';
+}
+
+// Show the popup
+document.querySelector('.popup').style.display = 'flex';

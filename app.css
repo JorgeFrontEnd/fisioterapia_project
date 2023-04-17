@@ -217,6 +217,52 @@ body{
     background-color:#8e44ad;
 }
 
+.popup {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+  }
+  
+  .popup-content {
+    background-color: #fff;
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    text-align: center;
+  }
+  
+  .popup-title {
+    font-size: 24px;
+    font-weight: bold;
+    margin: 0 0 10px;
+  }
+  
+  .popup-message {
+    font-size: 16px;
+    margin: 0 0 20px;
+  }
+  
+  .popup-button {
+    padding: 10px 20px;
+    border-radius: 5px;
+    background-color: #f44336;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+    font-size: 16px;
+  }
+  
+  .popup-button:hover {
+    background-color: #c62828;
+  }
+
 @media only screen and (max-width: 600px) {
     .app iframe{
         width: 280px;

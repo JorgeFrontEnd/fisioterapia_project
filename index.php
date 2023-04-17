@@ -1,11 +1,12 @@
 <?php
-    session_start();
-    require 'con.php';
-    
-    if (isset($_POST['login_username']) && isset($_POST['login_password'])) {
-        $login_username = $_POST['login_username'];
-        $login_password = $_POST['login_password'];
+session_start();
+require 'con.php';
 
+if (isset($_POST['login_username']) && isset($_POST['login_password'])) {
+    $login_username = $_POST['login_username'];
+    $login_password = $_POST['login_password'];
+
+    if(!empty($login_username) && !empty($login_password)) {
         $sql = "SELECT * FROM users WHERE username = '$login_username'";
         $result = mysqli_query($conn, $sql);
 
@@ -21,12 +22,21 @@
                     header('Location: user-page.php');
                 }
                 exit();
-            } else {
-                 echo "<script>alert('Invalid username or password.');</script>";
             }
         }
     }
+
+    // show popup for invalid credentials
+    echo '
+    <div class="popup">
+        <div class="popup-content">
+            <p class="popup-message">Oops! Credenciais incorretas</p>
+            <button class="popup-button">OK</button>
+        </div>
+    </div>';
+}
 ?>
+
 
 <!DOCTYPE html>
 <html lang="en">
@@ -48,6 +58,7 @@
         <button type="submit">Login</button>
     </form>
     </div>
-
+    
+    <script src="app.js"></script>
 </body>
 </html>
