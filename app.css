@@ -22,7 +22,7 @@ body{
 
 .app nav{
     width: 100%;
-    background-color: #2ecc71;
+    background-color: #3498db;
     margin-bottom: 50px;
 }
 
@@ -30,18 +30,54 @@ body{
     list-style-type:none;
     display: flex;
     justify-content: space-between;
-    padding: 15px;
+    align-items:center;
+    height: 60px;
+    padding: 0 15px;
 }
 
-.app iframe{
-    width: 600px;
-    height: 400px;
+.app ul span{    
+    font-size: 30px;
+    font-weight: bold;
+    color: #fff;
 }
 
 .app textarea{
-    width: 100%;
-    height: 30px;
+    width: 85%;
+    height: 50px;
     resize: none;
+}
+
+.app .logout{
+    background-color: #8e44ad;
+    color: #ecf0f1;
+    border: none;
+    padding: 15px;
+    font-size: 12px;
+    border-radius: 6px;
+}
+
+.app .logout:hover{
+    background-color: #9b59b6;
+   box-shadow: 0 6px 6px 10px rgb(142, 68, 173,0.4);
+}
+
+.app .answers{
+    position: relative;
+    left: 15%;
+    margin: 20px;
+    background-color:#95a5a6;
+    border-radius: 10px;
+    padding: 25px;
+    color: #fff;
+    width: 70%;
+}
+
+.app .questions{
+    margin: 20px;
+    background-color: #2c3e50;
+    border-radius: 10px;
+    padding: 25px;
+    color: #fff;
 }
 
 .form-pages form{
@@ -50,36 +86,68 @@ body{
     flex-direction: column;
     justify-content: center;
     background-color: #3498db;
-    width: 300px;
-    height: 500px;
+    width: 350px;
+    height: 400px;
     border-radius: 12px;
-    opacity: 0.9;
+    opacity: 0.8;
+}
+
+.form-pages form a{
+    text-decoration:none;
+    color: #fff;
+    font-weight: bold;
+}
+
+.form-pages.register form{
+    height: 550px;
 }
 
 .form-pages form label{
     font-size: 20px;
+    font-weight:bold;
     text-align: left;
-    padding: 15px;
+    width: 70%;
+    padding-top:15px;
 }
 
 .form-pages form input{
     display: flex;
-    width: 80%;
-    height: 8%;
+    width: 70%;
+    height: 30px;
+    background-color: #3498db;
+    border: none;
+    border-bottom: 1px solid #fff;
+    font-size: 16px;
+    color: #fff;
+}
+
+.form-pages form select{
+    width: 70%;
+    height: 30px;
+    background-color: #fff;
+    border: none;
+    font-size: 16px;
+    margin-top: 15px;
+}
+
+.form-pages form input:focus{
+    outline:none;
+    color: #fff;
 }
 
 .form-pages form button{
     width: 40%;
-    background-color: #2c3e50;
+    background-color: #8e44ad;
     color: #ecf0f1;
     border: none;
     padding: 15px;
     font-size: 20px;
+    border-radius: 6px;
 }
 
 .form-pages form button:hover{
-   background-color: #95a5a6;
-   transition-duration: 0.3s;
+   background-color: #9b59b6;
+   box-shadow: 0 6px 6px 10px rgb(142, 68, 173,0.4);
 }
 
 .form-pages form label{
@@ -91,22 +159,62 @@ body{
 }
 
 .accordion {
-  border: 1px solid #ccc;
   margin-bottom: 10px;
   width: 620px;
   height: auto;
+  border-radius: 20px;
+  border: 3px solid #bdc3c7;
 }
 
 .accordion-header {
-  background-color: #f5f5f5;
+  background-color: #bdc3c7;
   color: #333;
   cursor: pointer;
-  padding: 10px;
+  padding: 25px;
+  border-radius: 15px;
 }
 
 .accordion-panel {
   display: none;
   padding: 10px;
+}
+
+.app .video{
+    display: flex;
+    justify-content:center;
+    align-items:center;
+    margin-bottom: 30px;
+}
+
+.submit-question-btn{
+    background-color:#3498db;
+    color: #fff;
+    border: none;
+    padding: 15px;
+    font-size: 15px;
+    border-radius: 6px;
+    position: relative;
+    bottom: 23px;
+    cursor: pointer;
+}
+
+.submit-question-btn:hover{
+    background-color:#2980b9;
+}
+
+.show-answer{
+    background-color:#9b59b6;
+    color: #fff;
+    border: none;
+    padding: 10px;
+    font-size: 12px;
+    border-radius: 3px;
+    cursor: pointer;
+    margin-left: 20px;
+}
+
+.show-answer:hover{
+    background-color:#8e44ad;
 }
 
 @media only screen and (max-width: 600px) {
@@ -117,5 +225,10 @@ body{
     .app .accordion{
         width: 300px;
     }
-  }
+    
+    .app textarea{
+    width: 65%;
+    }
+    
+ }
 

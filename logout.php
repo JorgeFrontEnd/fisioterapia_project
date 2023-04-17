@@ -1,5 +1,6 @@
-<?php
-   require 'config.php';
+<?php   
+    session_start();
+   require 'con.php';
 
 // Unset all session variables
 $_SESSION = array();

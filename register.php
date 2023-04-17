@@ -1,5 +1,6 @@
 <?php
-require 'config.php';
+session_start();
+require 'con.php';
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $username = $_POST["username"];
@@ -41,7 +42,8 @@ $conn->close();
             <label>Password</label> <input type="password" name="password" required>
             <label>Height</label> <input type="number" name="height" step="0.01" required>
             <label>Weight</label><input type="number" name="weight" step="0.01" required>
-            Sex<select name="sex" required>
+            <label>Sex</label>
+            <select name="sex" required>
                 <option value="">Select...</option>
                 <option value="male">Male</option>
                 <option value="female">Female</option>

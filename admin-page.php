@@ -1,14 +1,7 @@
 <?php
+session_start();
+require 'con.php';
 
-require 'config.php';
-
-// Check if the user is logged in
-if (!isset($_SESSION['user_id'])) {
-  header('Location: index.php');
-  exit();
-}
-
-// Check if a question has been submitted
 if (isset($_POST['question'])) {
   // Get the question and user ID from the form data
   $question = $_POST['question'];
@@ -21,29 +14,31 @@ if (isset($_POST['question'])) {
     $category = null;
   }
 
-  // Check if the question is not empty
-  if (!empty($question)) {
-    // Prepare the SQL statement
-    $stmt = mysqli_prepare($conn, "INSERT INTO questions (user_id, question, category) VALUES (?, ?, ?)");
-
-    // Bind the parameters and execute the statement
-    mysqli_stmt_bind_param($stmt, "iss", $user_id, $question, $category);
-    mysqli_stmt_execute($stmt);
-
-    // Check if the insert was successful
-    if (mysqli_affected_rows($conn) > 0) {
-      echo "<script>alert('Pergunta submetida com sucesso.');</script>";
-    } else {
-      echo "Error inserting question: " . mysqli_error($conn);
-    }
-
-    // Close the statement
-    mysqli_stmt_close($stmt);
-  }
+  // Insert the question and user ID into the questions table
+  $insert_question = mysqli_prepare($conn, "INSERT INTO questions (question, user_id, category) VALUES (?, ?, ?)");
+  mysqli_stmt_bind_param($insert_question, "sis", $question, $user_id, $category);
+  mysqli_stmt_execute($insert_question);
+  mysqli_stmt_close($insert_question);
 }
 
-// Fetch all questions from the "Dance" category
+if (isset($_POST['answer'])) {
+  // Get the answer, user ID, and question ID from the form data
+  $answer = $_POST['answer'];
+  $user_id = $_SESSION['user_id'];
+  $question_id = $_POST['question_id'];
+
+  // Insert the answer, user ID, and question ID into the questions table
+  $insert_answer = mysqli_prepare($conn, "UPDATE questions SET answer=? WHERE id=?");
+  mysqli_stmt_bind_param($insert_answer, "si", $answer, $question_id);
+  mysqli_stmt_execute($insert_answer);
+  mysqli_stmt_close($insert_answer);
+}
+
 $dance_questions = mysqli_query($conn, "SELECT * FROM questions WHERE category='Danca'");
+$posture_questions = mysqli_query($conn, "SELECT * FROM questions WHERE category='Alongamentos'");
+$walking_questions = mysqli_query($conn, "SELECT * FROM questions WHERE category='Caminhada'");
+$pilates_questions = mysqli_query($conn, "SELECT * FROM questions WHERE category='Pilates'");
+$stretching_questions = mysqli_query($conn, "SELECT * FROM questions WHERE category='Relaxamento'");
 
 // Close the connection
 mysqli_close($conn);
@@ -66,54 +61,130 @@ mysqli_close($conn);
         <nav>
             <ul>
                 <li>
-                     Geronto Move
+                    <span>Geronto Move</span>
                 </li>
                 <li>
-                     <form method="POST" action="logout.php">
-                        <input type="submit" name="logout" value="Logout">
+                    <form method="POST" action="logout.php">
+                        <input class="logout" type="submit" name="logout" value="Logout">
                     </form>
 
                 </li>
             </ul>
         </nav>
-        <div class="accordion">
-            <div class="accordion-header">Dance</div>
+    <div class="accordion">
+            <div class="accordion-header">Dança</div>
             <div class="accordion-panel">
-                <iframe width="300" height="200" src="https://www.youtube.com/embed/tgbNymZ7vqY"></iframe>
-                <form action="user-page.php?category=Danca" method="POST">
-                    <label for="question">Question:</label><br>
-                    <textarea name="question" id="question" cols="30" rows="5" required></textarea><br><br>
-                    <input type="submit" value="Submit">
-                </form>
+                <div class="video">
+                    <video width="280" height="300" controls>
+                        <source src="dance.mp4" type="video/mp4">
+                    </video>
+                </div>
                 <hr>
-                <h3>Questions:</h3>
                 <?php while ($question = mysqli_fetch_assoc($dance_questions)): ?>
-                <p>
+                <div class="questions">
                     <?php echo $question['question']; ?>
-                </p>
+                </div>
+                <form class="answer-form" method="POST" action="">
+                    <input type="hidden" name="question_id" value="<?php echo $question['id']; ?>" />
+                    <textarea name="answer" placeholder="Enter your answer here" required></textarea>
+                    <input class="submit-question-btn" type="submit" value="Submit" />
+                </form>
                 <?php endwhile; ?>
             </div>
         </div>
-        <div class="accordion">
-            <div class="accordion-header">Posture</div>
+         <div class="accordion">
+            <div class="accordion-header">Alongamentos</div>
             <div class="accordion-panel">
-                <iframe width="300" height="200" src="https://www.youtube.com/embed/tgbNymZ7vqY"></iframe>
-                <form action="user-page.php?category=Postura" method="POST">
-                    <label for="question">Question:</label><br>
-                    <textarea name="question" id="question" cols="30" rows="5" required></textarea><br><br>
-                    <input type="submit" value="Submit">
-                </form>
+                <div class="video">
+                    <video width="280" height="300" controls>
+                        <source src="alongamentos.mp4" type="video/mp4">
+                    </video>
+                </div>
                 <hr>
-                <h3>Questions:</h3>
-                <?php while ($question = mysqli_fetch_assoc($dance_questions)): ?>
-                <p>
+                <?php while ($question = mysqli_fetch_assoc($posture_questions)): ?>
+                <div class="questions">
                     <?php echo $question['question']; ?>
-                </p>
+                </div>
+                <form class="answer-form" method="POST" action="">
+                    <input type="hidden" name="question_id" value="<?php echo $question['id']; ?>" />
+                    <textarea name="answer" placeholder="Enter your answer here" required></textarea>
+                    <input class="submit-question-btn" type="submit" value="Submit" />
+                </form>
                 <?php endwhile; ?>
             </div>
         </div>
+        
+        <div class="accordion">
+            <div class="accordion-header">Caminhada</div>
+            <div class="accordion-panel">
+                <div class="video">
+                    <video width="280" height="300" controls>
+                        <source src="walking.mp4" type="video/mp4">
+                    </video>
+                </div>
+                <hr>
+                <?php while ($question = mysqli_fetch_assoc($walking_questions)): ?>
+                <div class="questions">
+                    <?php echo $question['question']; ?>
+                </div>
+                <form class="answer-form" method="POST" action="">
+                    <input type="hidden" name="question_id" value="<?php echo $question['id']; ?>" />
+                    <textarea name="answer" placeholder="Enter your answer here" required></textarea>
+                    <input class="submit-question-btn" type="submit" value="Submit" />
+                </form>
+                <?php endwhile; ?>
+            </div>
+        </div>
+        
+        <div class="accordion">
+            <div class="accordion-header">Pilates</div>
+            <div class="accordion-panel">
+                <div class="video">
+                    <video width="280" height="300" controls>
+                        <source src="pilates.mp4" type="video/mp4">
+                    </video>
+                </div>
+                <hr>
+                <?php while ($question = mysqli_fetch_assoc($pilates_questions)): ?>
+                <div class="questions">
+                    <?php echo $question['question']; ?>
+                </div>
+                <form class="answer-form" method="POST" action="">
+                    <input type="hidden" name="question_id" value="<?php echo $question['id']; ?>" />
+                    <textarea name="answer" placeholder="Enter your answer here" required></textarea>
+                    <input class="submit-question-btn" type="submit" value="Submit" />
+                </form>
+                <?php endwhile; ?>
+            </div>
+        </div>
+        
+        <div class="accordion">
+            <div class="accordion-header">Relaxamento</div>
+            <div class="accordion-panel">
+                <div class="video">
+                    <video width="280" height="300" controls>
+                        <source src="relaxamento.mp4" type="video/mp4">
+                    </video>
+                </div>
+                <hr>
+                <?php while ($question = mysqli_fetch_assoc($stretching_questions)): ?>
+                <div class="questions">
+                    <?php echo $question['question']; ?>
+                </div>
+                <form class="answer-form" method="POST" action="">
+                    <input type="hidden" name="question_id" value="<?php echo $question['id']; ?>" />
+                    <textarea name="answer" placeholder="Enter your answer here" required></textarea>
+                    <input class="submit-question-btn" type="submit" value="Submit" />
+                </form>
+                <?php endwhile; ?>
+            </div>
+        </div>
+        
     </div>
     
+    
+    </div>
+
     <script src="app.js"></script>
 </body>
 

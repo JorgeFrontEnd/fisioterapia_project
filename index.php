@@ -1,5 +1,6 @@
 <?php
-    require 'config.php';
+    session_start();
+    require 'con.php';
     
     if (isset($_POST['login_username']) && isset($_POST['login_password'])) {
         $login_username = $_POST['login_username'];
